@@ -1,0 +1,81 @@
+<div class="py-20">
+  <div class="container mx-auto px-4">
+    <div class="text-center mb-12">
+      <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">À propos de moi</h2>
+      <div class="w-20 h-1 bg-indigo-600 mx-auto mb-6"></div>
+      <p class="text-gray-600 max-w-3xl mx-auto">
+        Découvrez mon parcours professionnel, mes compétences et ma passion pour le développement web.
+      </p>
+    </div>
+    
+    <!-- Section "Qui suis-je" -->
+    <div class="mb-16 max-w-3xl mx-auto">
+      <h3 class="text-2xl font-semibold mb-4 text-gray-800 text-center">Qui suis-je ?</h3>
+      <p class="text-gray-600 mb-4">
+        Je suis un développeur web passionné avec une expertise dans la création d'applications web modernes et intuitives. J'ai travaillé sur divers projets allant des sites vitrines aux applications complexes.
+      </p>
+      <p class="text-gray-600 mb-4">
+        Mon approche du développement se concentre sur la création de solutions élégantes, performantes et faciles à maintenir en utilisant les meilleures pratiques et technologies actuelles.
+      </p>
+      <p class="text-gray-600">
+        Lorsque je ne code pas, j'aime explorer de nouvelles technologies, contribuer à des projets open-source et partager mes connaissances.
+      </p>
+    </div>
+    
+    <!-- Carousel de technologies -->
+    <div class="mt-10">
+      <h3 class="text-2xl font-semibold mb-6 text-gray-800 text-center">Technologies maîtrisées</h3>
+      
+      <div class="relative max-w-4xl mx-auto">
+        <!-- Contrôles du carousel -->
+        <button 
+          (click)="prevSlide()" 
+          class="absolute top-1/2 left-0 -translate-y-1/2 -translate-x-6 bg-white rounded-full p-2 shadow-lg z-10 hover:bg-gray-100"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+          </svg>
+        </button>
+        
+        <div class="overflow-hidden relative">
+          <div class="flex transition-transform duration-500 ease-in-out" [style.transform]="'translateX(-' + (currentSlide * 100) + '%)'">
+            @for (tech of technologies; track tech.name) {
+              <div class="min-w-full flex items-center justify-center p-6">
+                <div class="bg-white rounded-lg shadow-md p-8 text-center w-64 mx-auto transform transition-transform hover:scale-105 hover:shadow-xl">
+                  <div class="flex items-center justify-center h-32 mb-4">
+                    <!-- Fallback si l'image n'est pas disponible -->
+                    <div class="bg-indigo-100 w-24 h-24 rounded-full flex items-center justify-center">
+                      <span class="text-2xl font-bold text-indigo-600">{{ tech.name.charAt(0) }}</span>
+                    </div>
+                  </div>
+                  <h4 class="text-xl font-semibold text-gray-800">{{ tech.name }}</h4>
+                </div>
+              </div>
+            }
+          </div>
+        </div>
+        
+        <button 
+          (click)="nextSlide()" 
+          class="absolute top-1/2 right-0 -translate-y-1/2 translate-x-6 bg-white rounded-full p-2 shadow-lg z-10 hover:bg-gray-100"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+          </svg>
+        </button>
+      </div>
+      
+      <!-- Indicateurs -->
+      <div class="flex justify-center mt-6 space-x-2">
+        @for (tech of technologies; track $index) {
+          <button 
+            (click)="currentSlide = $index" 
+            class="w-3 h-3 rounded-full" 
+            [class.bg-indigo-600]="currentSlide === $index" 
+            [class.bg-gray-300]="currentSlide !== $index"
+          ></button>
+        }
+      </div>
+    </div>
+  </div>
+</div>
